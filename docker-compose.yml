@@ -33,3 +33,25 @@ services:
     limits:
       memory: 2g
 
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - WEBUI_PORT=8081 #default port is 8080
+      - TORRENTING_PORT=6881
+    volumes:
+      - /opt/docker/config/qbittorrent:/config
+      - /mnt/Qbittorrent:/downloads #optional
+    ports:
+      - 8081:8081
+      - 6881:6881
+      - 6881:6881/udp
+    restart: unless-stopped
+
+
+
+  
+
